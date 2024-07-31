@@ -8,11 +8,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.electro.entity.Address;
-import com.example.electro.entity.BillingAddress;
+import com.example.electro.entity.ShippingAddress;
+import com.example.electro.service.BillingAddressService;
+import com.example.electro.service.ShippingAddressService;
 
 @Controller
 @RequestMapping("/checkout")
 public class CheckoutPageController {
+
+	private final BillingAddressService bilAddressService;
+	private final ShippingAddressService shipAddressService;
+
+	public CheckoutPageController(BillingAddressService bilAddressService, ShippingAddressService shipAddressService) {
+		this.bilAddressService = bilAddressService;
+		this.shipAddressService = shipAddressService;
+
+	}
 
 	@GetMapping
 	public String getCheckout(Model model) {
@@ -25,11 +36,9 @@ public class CheckoutPageController {
 //		bilgAddress.setCountry("Kyrgyzstan");
 //		bilgAddress.setZipCode("77004");
 //		bilgAddress.setPhoneNumber("+996 999 99 99 99");
-		
-		
 
 		model.addAttribute("checkout", new Address());
-		
+
 		return "checkout";
 	}
 
@@ -37,6 +46,10 @@ public class CheckoutPageController {
 	public String userCheckout(@ModelAttribute Address address) {
 		System.out.println(address.getBillingAddress().toString());
 		System.out.println(address.getShippingAddress().toString());
+
+		bilAddressService.save(address.getBillingAddress());
+		shipAddressService.save(address.getShippingAddress());
+		
 
 		return "result";
 	}
