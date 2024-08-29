@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "SHIPPING_ADDRESS")
@@ -12,30 +14,39 @@ public class ShippingAddress {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "ORDER_ID")
-	private Long orderId;
-	
+	@Column(name = "SHIPPING_ID")
+	private Long shipAddress_id;
+
 	@Column(name = "FIRST_NAME")
+	@NotBlank(message = "First name is required", groups = ConditionalGroup.class)
 	private String firstName;
 
 	@Column(name = "LAST_NAME")
+	@NotBlank(message = "Last name is required", groups = ConditionalGroup.class)
 	private String lastName;
 
+	@NotBlank(message = "Please, enter your email address", groups = ConditionalGroup.class)
+	@Email(message = "Please, enter a valid email address", groups = ConditionalGroup.class)
 	@Column(name = "EMAIL")
 	private String email;
 
+	@NotBlank(message = "Street is required", groups = ConditionalGroup.class)
 	@Column(name = "STREET")
 	private String street;
 
+	@NotBlank(message = "City is required", groups = ConditionalGroup.class)
 	@Column(name = "CITY")
 	private String city;
 
+	@NotBlank(message = "Country is required", groups = ConditionalGroup.class)
 	@Column(name = "COUNTRY")
 	private String country;
 
+	@NotBlank(message = "ZIP code is required", groups = ConditionalGroup.class)
 	@Column(name = "ZIP_CODE")
 	private String zipCode;
 
+	@NotBlank(message = "Phone number is required", groups = ConditionalGroup.class)
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 
@@ -57,11 +68,11 @@ public class ShippingAddress {
 	}
 
 	public Long getOrderId() {
-		return orderId;
+		return shipAddress_id;
 	}
 
 	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+		this.shipAddress_id = orderId;
 	}
 
 	public String getFirstName() {
@@ -130,9 +141,11 @@ public class ShippingAddress {
 
 	@Override
 	public String toString() {
-		return "ShippingAddress [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street="
-				+ street + ", city=" + city + ", country=" + country + ", zipCode=" + zipCode + ", phoneNumber="
-				+ phoneNumber + "]";
+		return "ShippingAddress [shipAddress_id=" + shipAddress_id + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", street=" + street + ", city=" + city + ", country=" + country + ", zipCode="
+				+ zipCode + ", phoneNumber=" + phoneNumber + "]";
 	}
+
+
 
 }

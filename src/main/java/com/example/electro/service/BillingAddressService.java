@@ -1,10 +1,11 @@
 package com.example.electro.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
 
-import com.example.electro.entity.BillingAddress;
+import com.example.electro.payload.BillingAddressRecord;
 
-public interface BillingAddressService extends JpaRepository<BillingAddress, Long> {
+public interface BillingAddressService {
 
-	
+	ResponseEntity<String> saveBillingAddress(BillingAddressRecord billingAddress);
+
 }

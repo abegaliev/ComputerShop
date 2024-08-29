@@ -1,12 +1,17 @@
 package com.example.electro.entity;
 
+import jakarta.validation.Valid;
+
 public class Address {
 
+	@Valid
 	private BillingAddress billingAddress;
+	
+	@Valid
 	private ShippingAddress shippingAddress;
 
 	public Address() {
-		super();
+
 	}
 
 	public Address(BillingAddress billingAddress, ShippingAddress shippingAddress) {
@@ -33,7 +38,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Adress [billingAddress=" + billingAddress + ", shippingAddress=" + shippingAddress + "]";
+		return "Address [billingAddress=" + billingAddress + ", shippingAddress=" + shippingAddress + "]";
 	}
 
 }

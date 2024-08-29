@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "BILLING_ADDRESS")
@@ -12,30 +14,39 @@ public class BillingAddress {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "ORDER_ID")
-	private Long orderId;
+	@Column(name = "BILLING_ID")
+	private Long billAddressId;
 
 	@Column(name = "FIRST_NAME")
+	@NotBlank(message = "First name is required")
 	private String firstName;
 
 	@Column(name = "LAST_NAME")
+	@NotBlank(message = "Last name is required")
 	private String lastName;
 
+	@NotBlank(message = "Please, enter your email address")
+	@Email(message = "Please, enter a valid email address")
 	@Column(name = "EMAIL")
 	private String email;
 
+	@NotBlank(message = "Street is required")
 	@Column(name = "STREET")
 	private String street;
 
+	@NotBlank(message = "City is required")
 	@Column(name = "CITY")
 	private String city;
 
+	@NotBlank(message = "Country is required")
 	@Column(name = "COUNTRY")
 	private String country;
 
+	@NotBlank(message = "ZIP code is required")
 	@Column(name = "ZIP_CODE")
 	private String zipCode;
 
+	@NotBlank(message = "Phone number is required")
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 
@@ -57,11 +68,11 @@ public class BillingAddress {
 	}
 
 	public Long getOrderId() {
-		return orderId;
+		return billAddressId;
 	}
 
 	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+		this.billAddressId = orderId;
 	}
 
 	public String getFirstName() {
@@ -130,9 +141,11 @@ public class BillingAddress {
 
 	@Override
 	public String toString() {
-		return "BillingAddress [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street="
-				+ street + ", city=" + city + ", country=" + country + ", zipCode=" + zipCode + ", phoneNumber="
-				+ phoneNumber + "]";
+		return "BillingAddress [billAddressId=" + billAddressId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", street=" + street + ", city=" + city + ", country=" + country + ", zipCode="
+				+ zipCode + ", phoneNumber=" + phoneNumber + "]";
 	}
+
+
 
 }
